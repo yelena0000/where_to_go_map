@@ -1,1 +1,11 @@
+asgiref==3.8.1
+dj-database-url==2.3.0
 Django==4.2
+django-admin-sortable2==2.2.4
+django-tinymce==4.1.0
+dotenv==0.9.9
+pillow==11.1.0
+python-dotenv==1.0.1
+sqlparse==0.5.3
+typing_extensions==4.12.2
+tzdata==2025.1
