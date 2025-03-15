@@ -1,7 +1,9 @@
 from django.contrib import admin
 from django.utils.html import format_html
 from adminsortable2.admin import SortableInlineAdminMixin, SortableAdminBase
+from tinymce.widgets import TinyMCE
 from .models import Place, PlaceImage
+from django import forms
 
 
 class PlaceImageInline(SortableInlineAdminMixin, admin.TabularInline):
@@ -17,7 +19,19 @@ class PlaceImageInline(SortableInlineAdminMixin, admin.TabularInline):
 
     image_preview.short_description = "Превью"
 
+
+class PlaceAdminForm(forms.ModelForm):
+    class Meta:
+        model = Place
+        fields = '__all__'
+
+    description_long = forms.CharField(
+        widget=TinyMCE(attrs={'cols': 80, 'rows': 30})
+    )
+
+
 @admin.register(Place)
-class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):  # Наследуемся от SortableAdminBase
+class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
+    form = PlaceAdminForm
     inlines = [PlaceImageInline]
     list_display = ('title',)
