@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
+from django.urls import reverse
 from .models import Place
 
 def index(request):
@@ -17,7 +18,7 @@ def index(request):
             "properties": {
                 "title": place.title,
                 "placeId": place.id,
-                "detailsUrl": f"/places/{place.id}/",
+                "detailsUrl": reverse('place_detail', args=[place.id]),
             }
         })
 
@@ -30,7 +31,6 @@ def index(request):
 
 
 def get_place_details(request, place_id):
-
     place = get_object_or_404(Place, id=place_id)
     images = place.images.all()
     imgs = [image.image.url for image in images]
@@ -44,4 +44,3 @@ def get_place_details(request, place_id):
         'longitude': place.longitude,
     }
     return JsonResponse(data, json_dumps_params={'ensure_ascii': False, 'indent': 4})
-
