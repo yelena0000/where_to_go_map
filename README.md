@@ -76,7 +76,7 @@ http://127.0.0.1:8000/admin/
 Для этого используйте команду:
 
 ```shell
-python manage.py load_place <URL_JSON_ФАЙЛА>
+python manage.py load_place http://адрес/файла.json
 ```
 
 ### Пример содержимого JSON-файла:
