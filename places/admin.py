@@ -29,10 +29,9 @@ class PlaceAdminForm(forms.ModelForm):
     class Meta:
         model = Place
         fields = '__all__'
-
-    description_long = forms.CharField(
-        widget=TinyMCE(attrs={'cols': 80, 'rows': 30})
-    )
+        widgets = {
+            'long_description': TinyMCE(attrs={'cols': 80, 'rows': 30}),
+        }
 
 
 @admin.register(Place)
